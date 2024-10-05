@@ -1,9 +1,0 @@
-Django
-python-dotenv
-django-filter
-mysqlclient
-psycopg2-binary
-razorpay
-
-
-
