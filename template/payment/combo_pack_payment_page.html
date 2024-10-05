@@ -1,0 +1,47 @@
+{% extends '../base.html' %}
+
+{% block title %}payment success{% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+  <div class="container text-center">
+    
+{% if payment %}
+<form action="{% url 'combo_package_payment_status' %}" method="POST">
+  <h3>successfully booked</h3>
+  <h4>To confirm it</h4>
+  <button id="rzp-button1"  style="background-color: rgb(215, 97, 174); color: #060202;">Pay Now</button>
+
+  {% csrf_token %}
+   
+  <script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        data-key="{{ RAZORPAY_PRODUCT_ID }}" 
+        data-amount="{{ payment.amount}}"
+        data-currency="{{ payment.currency }}"
+        data-order_id="{{ payment.id }}"
+        data-name="travel"
+        data-description="{{ card.description }}"
+        data-image="{{ card.image.url }}"
+        data-prefill.name="{{ payment.name }}"
+        data-prefill.email="{{ payment.email }}"
+        data-theme.color="#8ebd21"
+    ></script>
+  <input type="hidden" custom="Hidden Element" name="hidden"/>
+
+  
+</form>
+{% endif %}
+
+  </div>
+</div>
+ 
+
+<!-- Your existing HTML code -->
+
+{% endblock %}
+{% block script %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
+{% endblock script %}

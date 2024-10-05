@@ -1,0 +1,101 @@
+{% extends '../base.html' %}
+
+{% block title %}Booking{% endblock %}
+{% load static %}
+{% block content %}
+
+<style>
+    span{
+        content: "*\20B9";
+    }
+</style>
+<!--<script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_API_KEY}}&libraries=places"></script>-->
+
+   
+    <form class="form-group"  action="" method="POST">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <!--<h3>Plan Name: Ooty fun trip</h3>-->
+                </div>
+                <div class="col-4">
+                    <label for="name">Name :-</label>
+                    <input class="form-control" id="name" name="name" placeholder="name" type="text" maxlength="40" aria-describedby="name"/>
+                </div>
+                <div class="col-4">
+                </div>
+
+                <div class="col-4">
+                    <!--<h3>Description :2 days trip</h3>-->
+                </div>
+                <div class="col-4">
+                    <label for="usermail">Mail :-</label>
+                    <input class="form-control" id="usermail" name="mail" placeholder="Mail" type="email" maxlength="40" aria-describedby="user mail"/>
+                </div>
+                <div class="col-4">
+                </div>
+
+                <div class="col-4">
+                    <!--<h3>Ooty,Kothagiri,Conoor</h3>-->
+                </div>
+                <div class="col-4">
+                    <label for="userphone">Phone :-</label>
+                    <input class="form-control" id="userphone" name="phone_no" placeholder="+91 1234567891" type="number" maxlength="20" aria-describedby="user phone"/>
+                </div>
+                <div class="col-4">
+                </div>
+
+                <div class="col-4">
+                    <!--<h3>Price :<span>&#8377;</span>2500</h3>-->
+                </div>
+                <div class="col-4">
+                    <label>Pick Up Location :-</label>
+                    <input class="form-control" id="pickup" name="pick_up" placeholder="Pick Up" type="text" maxlength="40" aria-describedby="pick up Location"/>
+                </div>
+                <div class="col-4">
+                    
+                </div>
+                <div class="col-4">
+                </div>
+                <div class="col-4">
+                   
+                    <label>Drop Location :-</label>
+                    <input class="form-control" id="drop" name="drop" placeholder="Drop" type="text" maxlength="40" aria-describedby="drop Location"/>
+                </div>
+                <div class="col-4">
+                </div>
+                <div class="col-4">
+                </div>
+                <div class="col-4">
+                </div>
+                <div class="col-4">
+                </div>
+                <div class="col-4">
+                </div>
+                <div class="col-4">
+
+                        <button id="Submit" type="submit" class="btn btn-primary">Submit</button>    
+                </div>
+                <div class="col-4">
+                </div>
+                
+            </div>
+            
+
+        </div>
+
+
+    </form>
+    <!--<script>
+        // Initialize Google Places Autocomplete for pickup location
+        var pickupInput = document.getElementById('pickup');
+        var pickupAutocomplete = new google.maps.places.Autocomplete(pickupInput);
+    
+        // Initialize Google Places Autocomplete for drop location
+        var dropInput = document.getElementById('drop');
+        var dropAutocomplete = new google.maps.places.Autocomplete(dropInput);
+    </script>-->
+    
+
+    {% endblock %}

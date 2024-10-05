@@ -1,0 +1,35 @@
+{% extends '../base.html' %}
+
+{% block title %}payment success{% endblock %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Your Chosen Font', sans-serif; /* Replace 'Your Chosen Font' with the actual font you want to use */
+        color: #333; 
+    }
+
+    .container {
+        min-height: 100vh;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    /* Add any additional styles you want for the content */
+
+</style>
+
+<div class="container d-flex align-items-center justify-content-center">
+    <div class="text-center"> 
+        <h3>you successfully paid <i class="fas fa-check-circle"></i> </h3>
+        <h4>contact us with 9629529263</h4>
+            <div class="row">
+                <h3>Your order id: {{ bok.order_id }}</h3>
+
+            </div>
+        <p><a href="/" style="color: #333;">back to home Page</a></p>
+    </div>
+</div>
+{% endblock %}

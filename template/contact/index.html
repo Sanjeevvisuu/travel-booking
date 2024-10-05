@@ -1,0 +1,30 @@
+{% extends '../base.html' %}
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="container text-center">
+        {% for i in contact %}  
+        <div class="row">
+            <div class="col-12"></div>
+            <div class="col-12">
+                <h2>{{i.name}}</h2>
+            </div>
+            <div class="col-12">
+                <h3>{{i.travel_name}}</h3>
+            </div>
+            <div class="col-12">
+                <h3>+91 {{i.ph_no}}</h3>
+            </div>
+            <div class="col-12">
+                <h3>{{i.address}}</h3>
+            </div>
+            <div class="col-12">
+                <!-- Correct class name for the WhatsApp icon -->
+                <h3><i class="fab fa-whatsapp" aria-hidden="true">  </i>  +91  {{i.wathsapp_no}}</h3>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

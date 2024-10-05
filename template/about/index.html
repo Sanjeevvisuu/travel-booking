@@ -1,0 +1,14 @@
+{% extends "../base.html" %}
+{% block title %}About us{% endblock %}
+{% load static %}
+{% block content %}
+<div  class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+    <div class="text-center">
+        <h3>About Us</h3>
+        {% for i in about %}
+
+            <p>{{i.para}}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

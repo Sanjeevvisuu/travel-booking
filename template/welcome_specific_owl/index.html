@@ -1,0 +1,100 @@
+{% extends "../base.html" %}
+{% block title %}specific  package{% endblock %}
+{% load static %}
+{% block content %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://pay.google.com/gp/p/js/pay.js"></script>
+<div class="container">
+    <div class="row justify-content-center">
+       
+        <div class="col-md-6 col-lg-4" style="padding-top: 20px;">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ card.image.url }}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ card.title }}</h5>
+                  <i class="fas fa-map-marker-alt"></i>  {{ i.places }}
+                  <p class="card-text"><span style="color: black;">Discription :</span>{{ i.discription }}.</p>
+                  <p class="card-text">₹ {{ card.price }} only.</p>
+                </div>
+            </div>
+
+
+        </div>
+        <form class="form-group"  action="" method="POST">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        
+                    </div>
+                    <div class="col-4">
+                        <label for="name">Name :-</label>
+                        <input class="form-control" id="name" name="name" placeholder="name" type="text" maxlength="40" aria-describedby="name"/>
+                    </div>
+                    <div class="col-4">
+                    </div>
+    
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                        <label for="usermail">Mail :-</label>
+                        <input class="form-control" id="usermail" name="mail" placeholder="Mail" type="email" maxlength="40" aria-describedby="user mail"/>
+                    </div>
+                    <div class="col-4">
+                    </div>
+    
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                        <label for="userphone">Phone :-</label>
+                        <input class="form-control" id="userphone" name="phone_no" placeholder="+91 1234567891" type="number" maxlength="20" aria-describedby="user phone"/>
+                    </div>
+                    <div class="col-4">
+                    </div>
+    
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                        <label>Pick Up Location :-</label>
+                        <input class="form-control" id="pickup" name="pick_up" placeholder="Pick Up" type="text" maxlength="40" aria-describedby="pick up Location"/>
+                    </div>
+                    <div class="col-4">
+                        
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                       
+                        <label>Drop Location :-</label>
+                        <input class="form-control" id="drop" name="drop" placeholder="Drop" type="text" maxlength="40" aria-describedby="drop Location"/>
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                        
+    
+                            <button id="Submit" type="submit" class="btn btn-primary">Submit</button>    
+                      
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    
+                </div>
+                
+    
+            </div>
+    
+    
+        </form>
+    
+    </div>
+</div>
+{% endblock %}
