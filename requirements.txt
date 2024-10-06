@@ -8,3 +8,4 @@ boto3
 django-storages
 setuptools
 pillow
+supabase
