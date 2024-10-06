@@ -24,7 +24,13 @@ COPY . /my_code
 
 # Run Django migrations
 RUN python manage.py collectstatic
+
 RUN python manage.py makemigrations && python manage.py migrate
+# Set environment variables from the .env file for the superuser creation
+COPY .env /my_code/.env
+RUN export $(cat .env | xargs) && \
+    python manage.py createsuperuser --noinput --username "$username" --email "$email" && \
+    echo "Superuser created --- $username"
 
 EXPOSE 8008
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8008"]

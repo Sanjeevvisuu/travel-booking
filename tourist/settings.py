@@ -2,9 +2,11 @@
 
 from pathlib import Path
 import os
-
+#environment variable
 from dotenv import load_dotenv
 load_dotenv()
+#connect with aws bucket
+from storages.backends.s3boto3 import S3Boto3Storage 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 # Quick-start development settings - unsuitable for production
@@ -37,6 +39,9 @@ INSTALLED_APPS = [
     "payment",
     # third party apps
     'django_filters',
+    #connect with aws s3 bucket
+    'storages',
+
 ]
 
 MIDDLEWARE = [
@@ -114,22 +119,47 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
-# Set the STATIC_ROOT for deployment and to store the uploaded datas 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_URL="staticfiles/"
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#goole api key
-#install googlemaps connector tool to connect
+
+
+
+#aws s3 bucket
+
+# AWS S3 configuration for static and media files
+
+
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_ADDRESSING_STYLE = "virtual"
+AWS_S3_FILE_OVERWRITE = False
+
+# Static files settings
+STATIC_URL = 'static/'  # Static URL
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # when we prith python manage.py collectstatic all the static file will store here
+
+# Media files settings
+MEDIA_URL = 'media/'  # Media URL
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Local media directory
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "LOCATION": "static",  # Ensure this matches the path in your bucket
+    },
+    "mediafiles": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "LOCATION": "media",  # Ensure this matches the path in your bucket
+    },
+}
 
 
 RAZORPAY_SECRET_KEY=os.getenv("razor_sec_key")
