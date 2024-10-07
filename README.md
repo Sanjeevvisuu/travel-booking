@@ -13,7 +13,7 @@ aws :-
    boto3,django-storages
    add 'storages', - in settings - installed apps
 4) create a bucket:
-    - make it public and create a ploicy to give full acccess to  work in public 
+    - make it private and create a ploicy to give full acccess to it 
     {
         "Version": "2012-10-17",
         "Statement": [
@@ -26,6 +26,23 @@ aws :-
             }
         ]
     }
+    -- cros orgin add this policy it will access to other application 
+    [
+      {
+        "AllowedHeaders":[
+            "*"
+        ],
+        "AllowedMethods":[
+             "PUT",
+             "POST",
+             "GET"
+        ],
+        "AllowedOrigins":[
+            "*"
+        ],
+        "ExposedHeaders":[]
+      }
+    ]
 5) in settings.py file:- add thes configuration
   # AWS S3 configuration for static and media files
 
