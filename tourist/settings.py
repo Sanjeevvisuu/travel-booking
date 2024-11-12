@@ -82,12 +82,15 @@ WSGI_APPLICATION = 'tourist.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE':os.getenv("DB_Engine") ,
-        'NAME':os.getenv("DB_name") ,
-        'USER':os.getenv("DB_user") ,
+        'ENGINE': 'django.db.backends.mysql' ,
+        'NAME': os.getenv("DB_name") ,
+        'USER': os.getenv("DB_user") ,
         'PASSWORD': os.getenv("DB_passwd"),
-        'HOST':os.getenv("DB_host") ,
-        'PORT':os.getenv("DB_port"),
+        'HOST': os.getenv("DB_host") ,
+        'PORT': os.getenv("DB_port"),
+        'OPTIONS': {
+                 'ssl': {'ca': '/etc/ssl/certs/DigiCertGlobalRootCA.crt.pem'}  # Path to the SSL certificate
+         },
     } 
 }
 # Password validation
