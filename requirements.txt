@@ -2,10 +2,8 @@ Django
 python-dotenv
 django-filter
 mysqlclient
-psycopg2-binary
 razorpay
 boto3
-django-storages
 setuptools
 pillow
-supabase
+django-storages[azure]
