@@ -227,5 +227,7 @@ STORAGES = {
   - Install `django-storages[azure]`.
   - Set up Azure Blob Storage for static and media files.
   - Configure your containers for public access.
-
+## docker
+docker-compose build
+docker-compose up
 This setup will allow you to store and serve static and media files from **AWS S3** or **Azure Blob Storage** in your Django application.
