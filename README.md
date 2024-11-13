@@ -140,7 +140,7 @@ STORAGES = {
 
 ---
 
-## 5. **Azure Blob Storage Setup (Optional)**
+## 5. **Azure Blob Storage Setup **
 
 If you prefer using **Azure Blob Storage** for static and media files, follow these steps.
 
@@ -221,3 +221,17 @@ STORAGES = {
   docker-compose up  
   ```
 This setup will allow you to store and serve static and media files from **AWS S3** or **Azure Blob Storage** in your Django application.
+------
+## ** Automate using Jenkins **
+
+  ```bash
+    -- to avoid permission denied error 
+    sudo usermod -aG docker "ourusername "
+    sudo usermod -aG docker jenkins
+    ls -l /var/run/docker.sock
+    sudo chown root:docker /var/run/docker.sock
+    sudo chmod 660 /var/run/docker.sock
+    sudo systemctl restart docker
+    sudo systemctl restart jenkins
+  ```
+     
