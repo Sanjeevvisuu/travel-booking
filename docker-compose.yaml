@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: django_travel
     container_name: travel_booking_django
     ports:
       - "8008:8008"
