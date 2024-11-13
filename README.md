@@ -44,6 +44,9 @@ aws :-
       }
     ]
 5) in settings.py file:- add thes configuration
+from storages.backends.s3boto3 import S3Boto3Storage 
+ add 'storages', - in settings - installed apps
+ 
   # AWS S3 configuration for static and media files
 
 
@@ -80,11 +83,56 @@ aws :-
 
 
 =======================================
-added mysql sll key 
+added mysql ssl key 
+#azure storage to store static and media files
+settings.py# Static files settings
+
+from storages.backends.azure_storage import AzureStorage
+ add 'storages', - in settings - installed apps
+ 
+STATIC_URL = 'static/'  # Static URL
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # when we prith python manage.py collectstatic all the static file will store here
 
 
-===================
-test the connections 
-python manage.py collectstatic - it copy static file to bucket
-python manage.py migrate
-python manage.py runserver
+#Azure
+
+AZURE_CONTAINER_NAME_MEDIA = os.getenv("AZURE_CONTAINER_MEDIA")  # default media container name
+AZURE_CONTAINER_NAME_STATIC = os.getenv("AZURE_CONTAINER_STATIC")  # default static container name
+AZURE_ACCOUNT_NAME = os.getenv("AZURE_ACCOUNT_NAME")  # Your Azure account name
+AZURE_ACCOUNT_KEY = os.getenv("AZURE_ACCOUNT_KEY")  # Your Azure account key
+# Configure django-storages to use Azure Blob Storage for static and media files
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.azure_storage.AzureStorage",
+        "OPTIONS": {
+            "account_name": AZURE_ACCOUNT_NAME,
+            "account_key": AZURE_ACCOUNT_KEY,
+            "azure_container": AZURE_CONTAINER_NAME_MEDIA,  # Container for media files
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.azure_storage.AzureStorage",
+        "OPTIONS": {
+            "account_name": AZURE_ACCOUNT_NAME,
+            "account_key": AZURE_ACCOUNT_KEY,
+            "azure_container": AZURE_CONTAINER_NAME_STATIC,  # Container for static files
+        },
+    },
+}
+
+-- dependencys
+django-storages[azure] --in requirements.txt file
+
+--- azure storages
+1) create two containers media & static
+2) all anonymous access - configuration -allow anonymous access
+3) selelct our container and change access to anonymous access
+ 
+
+
+
+
+
