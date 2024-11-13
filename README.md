@@ -198,21 +198,7 @@ STORAGES = {
 2. **Set Container Permissions:**
    - Set both containers to **anonymous access** (allow public read access).
 
----
 
-## 6. **Final Steps**
-
-- **Run Django migrations**:
-  ```bash
-  python manage.py migrate
-  ```
-
-- **Collect static files**:
-  ```bash
-  python manage.py collectstatic
-  ```
-
-- **Test your application**: Make sure that static and media files are being correctly served from the configured storage backend (AWS S3 or Azure).
 
 ---
 
@@ -228,6 +214,10 @@ STORAGES = {
   - Set up Azure Blob Storage for static and media files.
   - Configure your containers for public access.
 ## docker
-docker-compose build
-docker-compose up
+
+
+  ```bash
+  docker-compose build
+  docker-compose up  
+  ```
 This setup will allow you to store and serve static and media files from **AWS S3** or **Azure Blob Storage** in your Django application.
