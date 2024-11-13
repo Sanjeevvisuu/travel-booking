@@ -26,12 +26,12 @@ COPY certs/DigiCertGlobalRootCA.crt.pem /etc/ssl/certs/
 # Update the CA certificates so the system can use the SSL certificate
 RUN update-ca-certificates
 
-# Run Django migrations
-RUN python manage.py collectstatic
-
+# Run Django migrations 
 RUN python manage.py makemigrations && python manage.py migrate
 # Set environment variables from the .env file for the superuser creation
 COPY .env /my_code/.env
+#to copy static & media  files 
+RUN python manage.py collectstatic --noinput
 
 
 #RUN python manage.py createsuperuser --username adminuser --email adminuser@gmail.com --password adminuser

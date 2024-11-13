@@ -172,14 +172,16 @@ STATIC_URL = 'static/'  # Static URL
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # when we prith python manage.py collectstatic all the static file will store here
 
-AZURE_CONTAINER_NAME_MEDIA = os.getenv("AZURE_CONTAINER_MEDIA", "media")  # default media container name
-AZURE_CONTAINER_NAME_STATIC = os.getenv("AZURE_CONTAINER_STATIC", "static")  # default static container name
+
+#Azure
+
+AZURE_CONTAINER_NAME_MEDIA = os.getenv("AZURE_CONTAINER_MEDIA")  # default media container name
+AZURE_CONTAINER_NAME_STATIC = os.getenv("AZURE_CONTAINER_STATIC")  # default static container name
 AZURE_ACCOUNT_NAME = os.getenv("AZURE_ACCOUNT_NAME")  # Your Azure account name
 AZURE_ACCOUNT_KEY = os.getenv("AZURE_ACCOUNT_KEY")  # Your Azure account key
 # Configure django-storages to use Azure Blob Storage for static and media files
 DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.azure_storage.AzureStorage",
@@ -200,6 +202,7 @@ STORAGES = {
 }
 
 
-#azure
+
+
 RAZORPAY_SECRET_KEY=os.getenv("razor_sec_key")
 RAZORPAY_PRODUCT_ID=os.getenv("razor_prod_id")
