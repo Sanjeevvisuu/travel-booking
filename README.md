@@ -218,7 +218,11 @@ STORAGES = {
 
   ```bash
   docker-compose build
-  docker-compose up  
+    docker-compose up
+-- afterbuilding  running it  login into that contaioner and create asuperuser
+   docker exec -it "conname or id " /bin/bash or /bin/sh
+   run - python manage.py createduperuser
+         python manage.py collectstatic   
   ```
 This setup will allow you to store and serve static and media files from **AWS S3** or **Azure Blob Storage** in your Django application.
 ------
