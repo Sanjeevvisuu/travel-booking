@@ -88,9 +88,9 @@ DATABASES = {
         'PASSWORD': os.getenv("DB_passwd"),
         'HOST': os.getenv("DB_host") ,
         'PORT': os.getenv("DB_port"),
-        'OPTIONS': {
-                 'ssl': {'ca': '/etc/ssl/certs/DigiCertGlobalRootCA.crt.pem'}  # Path to the SSL certificate
-         },
+      #  'OPTIONS': {
+       #          'ssl': {'ca': '/etc/ssl/certs/DigiCertGlobalRootCA.crt.pem'}  # Path to the SSL certificate
+       #  },
     } 
 }
 # Password validation
@@ -134,7 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # AWS S3 configuration for static and media files
 
-"""
+
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
@@ -165,8 +165,9 @@ STORAGES = {
         "LOCATION": "media",  # Ensure this matches the path in your bucket
     },
 }
-"""
+
 #-------------------------------
+"""
 # Static files settings
 STATIC_URL = 'static/'  # Static URL
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
@@ -201,7 +202,7 @@ STORAGES = {
     },
 }
 
-
+"""
 
 
 RAZORPAY_SECRET_KEY=os.getenv("razor_sec_key")
