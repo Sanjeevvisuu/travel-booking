@@ -7,7 +7,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Checking out the code...'
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Sanjeevvisuu/test-travel.git'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Sanjeevvisuu/travel-booking.git'
             }
         }
 
