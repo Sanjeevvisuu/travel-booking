@@ -4,7 +4,6 @@ pipeline {
         DOCKERHUB_CREDENTIALS = credentials('docker-hub') // Environment variable for Docker Hub credentials
     }
     stages {
-        // Stage for checking out the source code from the GitHub repository
         stage('Checkout') {
             steps {
                 echo 'Checking out the code...'
@@ -12,7 +11,6 @@ pipeline {
             }
         }
 
-        // Stage for building the Docker image for the Django application
         stage('Docker Build') {
             steps {
                 script {
@@ -25,7 +23,6 @@ pipeline {
             }
         }
 
-        // Stage for pushing the built Docker image to Docker Hub
         stage('Docker Image Push') {
             steps {
                 script {
@@ -45,35 +42,42 @@ pipeline {
         }
     }
 
-    // Post-build actions
     post {
         always {
             echo 'Cleaning up workspace...' // Cleanup after build completes, regardless of success or failure
         }
         success {
             echo 'Pipeline succeeded!'
+            // Get the last 100 lines of the console output
+            def buildLog = currentBuild.rawBuild.getLog(100).join('\n')
             // Send email on successful build
             emailext(
-                subject: "Jenkins Pipeline Succeeded: Travel Booking App",
+                subject: "Jenkins Pipeline Succeeded: Travel Booking App - Build #${BUILD_NUMBER}",
                 body: """The Jenkins pipeline for the Travel Booking App has completed successfully.
                     Build Information:
                     - Build Number: ${BUILD_NUMBER}
                     - Build Status: ${BUILD_STATUS}
                     - Build URL: ${BUILD_URL}
+                    - Console Output:
+                    ${buildLog}
                     Please check the Jenkins console output for details.""",
                 to: "sanjeevvisuu@gmail.com"
             )
         }
         failure {
             echo 'Pipeline failed!'
+            // Get the last 100 lines of the console output
+            def buildLog = currentBuild.rawBuild.getLog(100).join('\n')
             // Send email on build failure
             emailext(
-                subject: "Jenkins Pipeline Failed: Travel Booking App",
-                body: """The Jenkins pipeline for the Travel Booking App has failed. Please check the Jenkins console output for details.
+                subject: "Jenkins Pipeline Failed: Travel Booking App - Build #${BUILD_NUMBER}",
+                body: """The Jenkins pipeline for the Travel Booking App has failed.
                     Build Information:
                     - Build Number: ${BUILD_NUMBER}
                     - Build Status: ${BUILD_STATUS}
                     - Build URL: ${BUILD_URL}
+                    - Console Output:
+                    ${buildLog}
                     Please check the Jenkins console output for details.""",
                 to: "sanjeevvisuu@gmail.com"
             )
