@@ -30,111 +30,19 @@ Create a virtual environment and activate it:
 
 ---
 
-## 2. **Create IAM Policy (AWS)**
 
-Create an IAM policy for managing access to your S3 bucket:
+## 2. **AWS S3 Setup**
 
-- **Policy 1 (Basic S3 Access)**:
-  ```json
-  {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Sid": "AllowPutBucketPolicy",
-              "Effect": "Allow",
-              "Action": "s3:PutBucketPolicy",
-              "Resource": "arn:aws:s3:::my-django-travel-app"
-          },
-          {
-              "Sid": "AllowGetBucketPolicy",
-              "Effect": "Allow",
-              "Action": "s3:GetBucketPolicy",
-              "Resource": "arn:aws:s3:::my-django-travel-app"
-          }
-      ]
-  }
-  ```
-
-- **Policy 2 (Full S3 Access)**:
-  ```json
-  {
-      "Version": "2012-10-17",
-      "Statement": [
-          {
-              "Effect": "Allow",
-              "Action": [
-                  "s3:PutBucketPolicy",
-                  "s3:PutObject",
-                  "s3:GetObject",
-                  "s3:ListBucket"
-              ],
-              "Resource": [
-                  "arn:aws:s3:::my-django-travel-app",
-                  "arn:aws:s3:::my-django-travel-app/*"
-              ]
-          }
-      ]
-  }
-  ```
-
----
-
-## 3. **AWS S3 Setup**
-
-### 3.1. **Create an IAM User**
+### 2.1. **Create an IAM User**
 
 - Create a new IAM user in the [AWS Management Console](https://aws.amazon.com/iam/).
 - Attach the **AmazonS3FullAccess** policy to this user.
 - Create **Access Key ID** and **Secret Access Key** for local configuration.
 
-### 3.2. **Create S3 Bucket**
+### 3 **Create S3 Bucket**
 
 - Go to S3 in the AWS console and create a new bucket (e.g., `django-travel-booking`).
-- Set the bucket to **private**.
 
-### 3.3. **Bucket Policy for Public Access (GetObject)**
-
-Add the following policy to allow public read access to objects in the bucket:
-
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "PublicReadGetObject",
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::my-django-travel-app/*"
-        }
-    ]
-}
-```
-
-### 3.4. **CORS Policy for Cross-Origin Requests**
-
-Allow cross-origin access to your bucket:
-
-```json
-[
-    {
-        "AllowedHeaders": [
-            "*"
-        ],
-        "AllowedMethods": [
-            "GET",
-            "POST",
-            "PUT"
-        ],
-        "AllowedOrigins": [
-            "*"
-        ],
-        "ExposeHeaders": []
-    }
-]
-```
-
----
 
 ## 4. **Install Dependencies**
 
