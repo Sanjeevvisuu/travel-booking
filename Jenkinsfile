@@ -50,7 +50,12 @@ pipeline {
             echo 'Pipeline succeeded!'
             emailext(
                 subject: "Jenkins Pipeline Succeeded: Travel Booking App",
-                body: "The Jenkins pipeline for the Travel Booking App has completed successfully.",
+                body: """The Jenkins pipeline for the Travel Booking App has completed successfully.
+                      Build Information:
+                    - Build Number: ${BUILD_NUMBER}
+                    - Build Status: ${BUILD_STATUS}
+                    - Build URL: ${BUILD_URL}
+                    Please check the Jenkins console output for details.""",
                 to: "sanjeevvisuu@gmail.com"
             )
         }
@@ -58,7 +63,12 @@ pipeline {
             echo 'Pipeline failed!'
             emailext(
                 subject: "Jenkins Pipeline Failed: Travel Booking App",
-                body: "The Jenkins pipeline for the Travel Booking App has failed. Please check the Jenkins console output for details.",
+                body: """The Jenkins pipeline for the Travel Booking App has failed. Please check the Jenkins console output for details.
+                    Build Information:
+                    - Build Number: ${BUILD_NUMBER}
+                    - Build Status: ${BUILD_STATUS}
+                    - Build URL: ${BUILD_URL}
+                    Please check the Jenkins console output for details.""",
                 to: "sanjeevvisuu@gmail.com"
             )
         }
