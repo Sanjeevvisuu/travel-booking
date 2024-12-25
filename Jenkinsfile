@@ -48,9 +48,8 @@ pipeline {
         }
         success {
             echo 'Pipeline succeeded!'
-            // Get the last 100 lines of the console output
-            def buildLog = currentBuild.rawBuild.getLog(100).join('\n')
-            // Send email on successful build
+            
+            
             emailext(
                 subject: "Jenkins Pipeline Succeeded: Travel Booking App - Build #${BUILD_NUMBER}",
                 body: """The Jenkins pipeline for the Travel Booking App has completed successfully.
@@ -66,9 +65,7 @@ pipeline {
         }
         failure {
             echo 'Pipeline failed!'
-            // Get the last 100 lines of the console output
-            def buildLog = currentBuild.rawBuild.getLog(100).join('\n')
-            // Send email on build failure
+            
             emailext(
                 subject: "Jenkins Pipeline Failed: Travel Booking App - Build #${BUILD_NUMBER}",
                 body: """The Jenkins pipeline for the Travel Booking App has failed.
