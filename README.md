@@ -57,7 +57,27 @@ Add the following policy to allow public read access to objects in the bucket:
     ]
 }
 ```
+### 2.3. **Cross-origin resource sharing (CORS)**
 
+
+
+```json
+[
+    {
+        "AllowedHeaders": [
+            "*"
+        ],
+        "AllowedMethods": [
+            "GET",
+            "POST",
+            "PUT"
+        ],
+        "AllowedOrigins": [
+            "*"
+        ],
+        "ExposeHeaders": []
+    }
+]}
 
 
 ---
