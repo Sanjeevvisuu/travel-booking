@@ -1,0 +1,104 @@
+# ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: django-configmap
+data:
+  DB_ENGINE: "django.db.backends.mysql"
+  DB_NAME: "python_project"
+  DB_HOST: "43.205.98.243"
+  DB_PORT: "3306"
+  django_sec_key: "django-insecure-oq64j)^%8f-@&8@of@by1w_s$89yl(8p4g9sq!-(976b-*3=hh"
+  AWS_STORAGE_BUCKET_NAME: "my-django-travel-app"  # Fixed typo: "tavel" -> "travel"
+  AWS_S3_REGION_NAME: "ap-south-1"
+
+---
+
+# Secrets
+apiVersion: v1
+kind: Secret
+metadata:
+  name: django-secrets
+type: Opaque
+data:
+  DB_USER: cHl0aG9u  # python (base64 encoded)
+  DB_PASSWD: cHl0aG9ucGFzc3dvcmQ=  # pythonpassword (base64 encoded)
+  AWS_ACCESS_KEY_ID: QUtJQVE0TlhRR09YS01XUU00VEQ=  # Correct base64 encoded AWS Access Key
+  AWS_SECRET_ACCESS_KEY: UE5kbmpIWG5xR2p4RVU2SVZxUWpXTW1weXV0emlLN0Z1NW5keHdIaA==  # Correct base64 encoded AWS Secret Key
+
+---
+
+# ClusterIP Service (Internal Access)
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-cluster-service
+spec:
+  type: ClusterIP  # Internal access only
+  selector:
+    app: django_app  # Ensure this matches the labels of your pod
+  ports:
+    - protocol: TCP
+      port: 8008  # Exposing port 8008 internally
+      targetPort: 8008
+
+---
+
+# LoadBalancer Service (External Access)
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: django_app  # Updated to match the correct label
+  ports:
+    - protocol: TCP
+      port: 80  # Exposing port 80 externally
+      targetPort: 8008  # Exposing port 8008 internally to the pods
+  type: LoadBalancer  # Exposes the service externally using an ELB
+
+---
+
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django_app  # Match the label in the template
+  template:
+    metadata:
+      labels:
+        app: django_app  # Ensure this matches the selector
+    spec:
+      containers:
+      - name: django
+        image: sanjeevvisu/travel_app:latest  # Ensure this image exists and is accessible
+        envFrom:
+        - configMapRef:
+            name: django-configmap  # ConfigMap is correctly referenced
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: django-secrets
+              key: DB_USER  # Injecting from secret
+        - name: DB_PASSWD
+          valueFrom:
+            secretKeyRef:
+              name: django-secrets
+              key: DB_PASSWD  # Injecting from secret
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: django-secrets
+              key: AWS_ACCESS_KEY_ID  # Injecting from secret
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: django-secrets
+              key: AWS_SECRET_ACCESS_KEY  # Injecting from secret
