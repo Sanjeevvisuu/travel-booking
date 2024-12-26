@@ -32,11 +32,25 @@ pipeline {
                         # Log in to Docker Hub
                         echo "$DOCKER_PASSWORD" |  docker login -u "$DOCKER_USERNAME" --password-stdin
                         # Tag and push the image to Docker Hub
-                           docker tag  django_travel $DOCKER_USERNAME/travel_app:latest
+                           docker tag django_travel $DOCKER_USERNAME/travel_app:latest
                            docker push $DOCKER_USERNAME/travel_app:latest
                         '''
                     }
-                    echo 'Pushed application to Docker Hub.'
+                    echo 'Docker image pushed to Docker Hub.'
+                }
+            }
+        }
+
+        stage('Deploy in EKS cluster') {
+            steps {
+                script {
+                    echo 'Deploying to EKS cluster...'
+                    sh '''
+                       aws eks update-kubeconfig --name demo1 --region ap-south-1
+                       kubectl get pods
+                       kubectl apply -f k8s.yaml 
+                    '''
+                    echo 'Deployed application to EKS cluster.'
                 }
             }
         }
@@ -50,24 +64,11 @@ pipeline {
             echo 'Pipeline succeeded!'
             
             
-            emailext(
-                subject: "Jenkins Pipeline Succeeded: Travel Booking App - Build #${BUILD_NUMBER}",
-                body: """The Jenkins pipeline for the Travel Booking App has completed successfully.
-                 
-                    Please check the Jenkins console output for details.""",
-                to: "sanjeevvisuu@gmail.com"
-            )
         }
         failure {
             echo 'Pipeline failed!'
             
-            emailext(
-                subject: "Jenkins Pipeline Failed: Travel Booking App - Build #${BUILD_NUMBER}",
-                body: """The Jenkins pipeline for the Travel Booking App has failed.
-               
-                    Please check the Jenkins console output for details.""",
-                to: "sanjeevvisuu@gmail.com"
-            )
+            
         }
     }
 }
