@@ -21,8 +21,8 @@ metadata:
   name: django-secrets
 type: Opaque
 data:
-  DB_USER:  cHl0aG9u # python (base64 encoded)
-  DB_PASSWD: cHl0aG9ucGFzc3dvcmQ= # pythonpassword (base64 encoded)
+  DB_USER:  cHl0aG9u # (base64 encoded)
+  DB_PASSWD: cHl0aG9ucGFzc3dvcmQ= #  (base64 encoded)
   AWS_ACCESS_KEY_ID: QUtJQVE0TlhRR09YTkxYVERIVkc=  # Correct base64 encoded AWS Access Key
   AWS_SECRET_ACCESS_KEY: elpsRW5zTUtsOG9sQUovelY4NjlRMlFtdzNabUhpQjJCa1hnMGlhQg== # Correct base64 encoded AWS Secret Key
 
