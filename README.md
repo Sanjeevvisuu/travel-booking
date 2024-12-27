@@ -1,4 +1,4 @@
-Here’s a revised version of the guide, optimized for inclusion in a GitHub README file. It’s been reformatted with clearer sections, concise bullet points, and improved readability:
+
 
 ---
 
