@@ -250,7 +250,13 @@ sudo chmod 660 /var/run/docker.sock
 sudo systemctl restart docker
 sudo systemctl restart jenkins
 ```
-
+#CONNECT WITH AWS EKS cluster
+1)aws configure
+aws eks --region region update-kubeconfig --name clustername
+2)sudo -su jenkins
+cd /var/lib/jenkins/
+aws configure
+aws eks --region region update-kubeconfig --name clustername
 ---
 
 ## **Summary**
