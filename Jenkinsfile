@@ -49,6 +49,8 @@ pipeline {
                        aws eks --region ap-south-1 update-kubeconfig --name EKS-cluster
                        kubectl get pods
                        kubectl apply -f k8s.yaml 
+                       kubectl get pods
+                       kubectl get svc
                     '''
                     echo 'Deployed application to EKS cluster.'
                 }
