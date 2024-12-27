@@ -6,7 +6,7 @@ metadata:
 data:
   DB_ENGINE: "django.db.backends.mysql"
   DB_NAME: "python"
-  DB_HOST: "10.0.32.195"
+  DB_HOST: "10.0.32.229"
   DB_PORT: "3306"
   django_sec_key: "django-insecure-oq64j)^%8f-@&8@of@by1w_s$89yl(8p4g9sq!-(976b-*3=hh"
   AWS_STORAGE_BUCKET_NAME: "my-django-app11"  # Fixed typo: "tavel" -> "travel"
