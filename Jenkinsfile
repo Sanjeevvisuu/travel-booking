@@ -46,7 +46,7 @@ pipeline {
                 script {
                     echo 'Deploying to EKS cluster...'
                     sh '''
-                       aws eks update-kubeconfig --name EKS-coustom-creation --region ap-south-1
+                       aws eks --region ap-south-1 update-kubeconfig --name EKS-coustom-creation
                        kubectl get pods
                        kubectl apply -f k8s.yaml 
                     '''
