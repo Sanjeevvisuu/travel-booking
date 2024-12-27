@@ -5,12 +5,12 @@ metadata:
   name: django-configmap
 data:
   DB_ENGINE: "django.db.backends.mysql"
-  DB_NAME: "python"
-  DB_HOST: "10.0.32.229"
+  DB_NAME: ""
+  DB_HOST: "IP"
   DB_PORT: "3306"
   django_sec_key: "django-insecure-oq64j)^%8f-@&8@of@by1w_s$89yl(8p4g9sq!-(976b-*3=hh"
-  AWS_STORAGE_BUCKET_NAME: "my-django-app11"  # Fixed typo: "tavel" -> "travel"
-  AWS_S3_REGION_NAME: "ap-south-1"
+  AWS_STORAGE_BUCKET_NAME: ""  
+  AWS_S3_REGION_NAME: ""
 
 ---
 
@@ -21,10 +21,10 @@ metadata:
   name: django-secrets
 type: Opaque
 data:
-  DB_USER:  cHl0aG9u # (base64 encoded)
-  DB_PASSWD: cHl0aG9ucGFzc3dvcmQ= #  (base64 encoded)
-  AWS_ACCESS_KEY_ID: QUtJQVE0TlhRR09YTkxYVERIVkc=  # Correct base64 encoded AWS Access Key
-  AWS_SECRET_ACCESS_KEY: elpsRW5zTUtsOG9sQUovelY4NjlRMlFtdzNabUhpQjJCa1hnMGlhQg== # Correct base64 encoded AWS Secret Key
+  DB_USER:   # (base64 encoded)
+  DB_PASSWD:  #  (base64 encoded)
+  AWS_ACCESS_KEY_ID:   # Correct base64 encoded AWS Access Key
+  AWS_SECRET_ACCESS_KEY:  # Correct base64 encoded AWS Secret Key
 
 ---
 
