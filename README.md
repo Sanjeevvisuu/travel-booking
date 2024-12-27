@@ -138,7 +138,7 @@ STORAGES = {
 
 ---
 
-## **5. Azure Blob Storage Setup (Optional)**
+## **5. Azure Blob Storage Setup **
 
 If you prefer **Azure Blob Storage** over AWS S3, follow these steps:
 
@@ -193,7 +193,7 @@ STORAGES = {
 
 ---
 
-## **6. Docker Setup (Optional)**
+## **6. Docker Setup **
 
 To deploy with Docker, follow these steps:
 
@@ -217,7 +217,7 @@ python manage.py collectstatic
 
 ---
 
-## **7. Jenkins Automation (Optional)**
+## **7. Jenkins Automation **
 
 To resolve Docker permission issues in Jenkins, follow these steps:
 
@@ -258,7 +258,7 @@ sudo systemctl restart jenkins
   - Set up an S3 bucket with public read access and CORS.
   - Install and configure `boto3` and `django-storages`.
 
-- **Azure Blob Storage Setup (Optional)**:
+- **Azure Blob Storage Setup **:
   - Install `django-storages[azure]`.
   - Set up Azure Blob Storage for static and media files.
   - Configure containers for public access.
