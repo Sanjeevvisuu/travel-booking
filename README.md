@@ -10,7 +10,7 @@ This guide demonstrates how to configure a Django project to use **AWS S3** or *
 
 ## **1. Set Up Virtual Environment**
 
-### Linux/macOS:
+### Linux:
 ```bash
 python -m venv django_env
 source django_env/bin/activate
